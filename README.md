@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# prompt experiments
 
-## Getting Started
+**test content strategies, not AI voices**
 
-First, run the development server:
+an open-source platform for systematically testing which content strategy performs best. compare variants side-by-side, learn what works, and stop guessing.
+
+## why this exists
+
+ai users constantly modify prompts trying to improve outputs. they create version 1, version 2, version 20. but they have no idea which version performs best, what changed between versions, or whether a modification improved results.
+
+prompt experiments answers four questions:
+
+1. which version performs best?
+2. why does it perform best?
+3. what changed from previous versions?
+4. should i keep iterating or stop?
+
+## hyv integration
+
+every variant is processed through [hold your voice](https://github.com/holdyourvoice/hyv) before comparison. this strips ai patterns and ensures you're comparing content strategies — not random ai-voice lottery results. without hyv, comparing ai-generated variants is noise. with hyv, the comparison becomes meaningful.
+
+if hyv is not installed, the tool works standalone — but variants won't be voice-matched.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm i -g hyvoice
+hyvoice init
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **version tree**: fork prompts and track evolution like branches
+- **side-by-side diff**: see exactly what changed between versions with git-style diffs
+- **experiments**: test all versions against the same input simultaneously
+- **human evaluation**: rank outputs (best, second, third) — results feed the leaderboard
+- **leaderboard**: see which version wins most often
+- **auto-generated variants**: create persuasive, concise, contrarian, storytelling, data-driven, and humorous variants automatically
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## quick start
 
-## Learn More
+### docker (recommended)
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker compose up
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+open [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### local development
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+open [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## tech stack
+
+- next.js 16 + typescript
+- tailwind css v4
+- sqlite (better-sqlite3) — zero config, single file
+- docker support
+
+## license
+
+MIT
